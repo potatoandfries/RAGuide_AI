@@ -66,7 +66,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'raguide.wsgi.application'
+ASGI_APPLICATION = 'raguide.asgi.application'
 
 
 # Database

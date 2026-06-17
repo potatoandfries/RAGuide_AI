@@ -1,4 +1,12 @@
-django
-djangorestframework 
-chromadb 
-sentence-transformers
+# Core Framework
+Django==6.0.6
+djangorestframework==3.17.1
+
+# ASGI Server
+uvicorn==0.49.0
+
+# Vector Database
+chromadb==1.5.9
+
+# Embeddings / NLP
+sentence-transformers==5.5.1
