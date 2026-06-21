@@ -20,7 +20,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    Browser / Frontend                       │
+│              Angular Frontend (RAGUIDE_AI_Frontend)         │
 └─────────────────────────┬───────────────────────────────────┘
                           │ HTTP/SSE
 ┌─────────────────────────▼───────────────────────────────────┐
@@ -103,7 +103,7 @@ RAGuide_AI/
 │   ├── api/                # PDF upload, chunking, RAG endpoints
 │   ├── raguide/            # Django project settings
 │   └── manage.py
-├── RAGUIDE_AI_Frontend/    # Angular frontend (coming soon)
+├── RAGUIDE_AI_Frontend/    # Angular frontend
 ├── venv/                   # Python virtual environment
 ├── requirements.txt
 └── README.md
