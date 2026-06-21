@@ -1,0 +1,38 @@
+<div class="chat-page">
+  <header>
+    <h1>RAGuide AI</h1>
+    <nav>
+      <a routerLink="/dashboard">Documents</a>
+      <a routerLink="/chat">Chat</a>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="chat-container">
+      <div class="messages">
+        @if (messages.length === 0) {
+          <div class="welcome">
+            <h2>Ask a question about your documents</h2>
+            <p>Type a prompt below to get started.</p>
+          </div>
+        }
+        @for (msg of messages; track $index) {
+          <div class="message" [class.user]="msg.role === 'user'" [class.assistant]="msg.role === 'assistant'">
+            <div class="bubble">{{ msg.text }}</div>
+          </div>
+        }
+      </div>
+
+      <div class="input-area">
+        <input
+          type="text"
+          [(ngModel)]="prompt"
+          (keyup.enter)="send()"
+          placeholder="Ask a question about your documents..."
+        />
+        <button (click)="send()" [disabled]="!prompt.trim()">Send</button>
+      </div>
+    </div>
+  </main>
+</div>

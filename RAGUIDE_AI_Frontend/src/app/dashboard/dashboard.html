@@ -1,0 +1,43 @@
+<div class="dashboard">
+  <header>
+    <h1>RAGuide AI</h1>
+    <nav>
+      <a routerLink="/dashboard">Documents</a>
+      <a routerLink="/chat">Chat</a>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="upload-section">
+      <h2>Upload PDF</h2>
+      <div class="upload-form">
+        <input type="file" accept=".pdf" (change)="onFileSelected($event)" />
+        <button (click)="upload()" [disabled]="!selectedFile || uploading">
+          {{ uploading ? 'Uploading...' : 'Upload' }}
+        </button>
+      </div>
+      @if (error) {
+        <div class="error">{{ error }}</div>
+      }
+    </section>
+
+    <section class="documents-section">
+      <h2>Your Documents</h2>
+      @if (documents.length === 0) {
+        <p class="empty">No documents yet. Upload a PDF to get started.</p>
+      }
+      <div class="document-list">
+        @for (doc of documents; track doc.id) {
+          <div class="document-card">
+            <div class="doc-info">
+              <strong>{{ doc.title }}</strong>
+              <span class="doc-date">{{ doc.uploaded_at | date:'medium' }}</span>
+            </div>
+            <button class="delete-btn" (click)="deleteDoc(doc.id)">Delete</button>
+          </div>
+        }
+      </div>
+    </section>
+  </main>
+</div>
