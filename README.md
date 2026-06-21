@@ -20,12 +20,12 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    Browser / Frontend                        │
+│                    Browser / Frontend                       │
 └─────────────────────────┬───────────────────────────────────┘
                           │ HTTP/SSE
 ┌─────────────────────────▼───────────────────────────────────┐
-│                    Django (Backend API)                      │
-│          • User sessions • PDF upload • REST endpoints       │
+│                    Django (Backend API)                     │
+│          • User sessions • PDF upload • REST endpoints      │
 └─────────┬──────────────────────────────┬────────────────────┘
           │                              │
           ▼                              ▼
@@ -38,9 +38,9 @@
                                   ┌──────▼──────┐
                                   │ LangGraph   │
                                   │ Agent       │
-                                  │ • Conditional│
-                                  │   workflows  │
-                                  │ • Memory     │
+                                  │• Conditional│
+                                  │  workflows  │
+                                  │• Memory     │
                                   └─────────────┘
 ```
 
@@ -75,7 +75,8 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Run migrations
+# Enter backend and run migrations
+cd RAGUIDE_AI_Backend
 python manage.py migrate
 
 # Start Django (with ChromaDB auto-creating)
@@ -98,19 +99,14 @@ LLM_MODEL=llama2
 
 ```
 RAGuide_AI/
-├── apps/
-│   ├── chat/           # Ollama streaming + conversation memory
-│   ├── documents/      # PDF upload, chunking, parsing
-│   ├── rag/            # Retrieval + generation pipeline
-│   ├── quizzes/        # MCQ generation + difficulty adaptation
-│   └── agents/         # LangGraph workflows
-├── core/
-│   ├── vector_store.py # ChromaDB wrapper
-│   ├── embeddings.py   # sentence-transformers service
-│   └── config.py       # Settings + env vars
-├── templates/          # Django templates (or DRF + React)
+├── RAGUIDE_AI_Backend/     # Django REST API backend
+│   ├── api/                # PDF upload, chunking, RAG endpoints
+│   ├── raguide/            # Django project settings
+│   └── manage.py
+├── RAGUIDE_AI_Frontend/    # Angular frontend (coming soon)
+├── venv/                   # Python virtual environment
 ├── requirements.txt
-└── manage.py
+└── README.md
 ```
 
 ---

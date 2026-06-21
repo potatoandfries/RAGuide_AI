@@ -22,7 +22,7 @@ class DocumentChunkViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-### you need to understand this before you contineu
+### you need to understand this before you continue
     def get_queryset(self):
         # Only return chunks from documents the user owns
         return DocumentChunk.objects.filter(document__user=self.request.user)
