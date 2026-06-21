@@ -50,6 +50,9 @@ export class Dashboard implements OnInit {
       next: () => {
         this.uploading = false;
         this.selectedFile = null;
+        // Reset the file input so the filename clears
+        const fileInput = document.querySelector<HTMLInputElement>('input[type="file"]');
+        if (fileInput) fileInput.value = '';
         this.loadDocuments();
       },
       error: () => {

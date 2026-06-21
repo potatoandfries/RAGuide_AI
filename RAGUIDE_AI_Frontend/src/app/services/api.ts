@@ -39,12 +39,10 @@ export class ApiService {
   }
 
   register(username: string, password: string, email: string) {
-    // DRF doesn't have a built-in registration endpoint, so we create the user via the admin-like API
     return this.http.post<{ token: string }>(`${this.baseUrl}/api/auth/register/`, { username, password, email });
   }
 
   logout() {
-    // Token-based auth: just remove the token on the client side
     return this.http.post(`${this.baseUrl}/api/auth/logout/`, {}, { headers: this.getHeaders() });
   }
 
@@ -54,7 +52,12 @@ export class ApiService {
   }
 
   uploadDocument(formData: FormData) {
-    return this.http.post<PDFDocument>(`${this.baseUrl}/api/documents/`, formData, { headers: this.getHeaders() });
+    // Do NOT set Content-Type header — browser must set it with the multipart boundary for FormData
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': token ? `Token ${token}` : '',
+    });
+    return this.http.post<PDFDocument>(`${this.baseUrl}/api/documents/`, formData, { headers });
   }
 
   deleteDocument(id: number) {

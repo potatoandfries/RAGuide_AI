@@ -68,6 +68,7 @@ main {
   border-radius: 12px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.1);
   overflow: hidden;
+  min-height: 400px;
 }
 
 .messages {
@@ -121,11 +122,83 @@ main {
   border-bottom-left-radius: 4px;
 }
 
+/* Bottom bar — contains upload row + input row */
+.bottom-bar {
+  border-top: 1px solid #eee;
+  background: #fafafa;
+}
+
+/* Upload row */
+.upload-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid #eee;
+  flex-wrap: wrap;
+}
+
+.upload-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 200px;
+}
+
+.upload-form input[type="file"] {
+  font-size: 0.85rem;
+  flex: 1;
+}
+
+.upload-btn {
+  padding: 0.4rem 1rem;
+  background: #43a047;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.upload-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.upload-btn:hover:not(:disabled) {
+  background: #388e3c;
+}
+
+.error-msg {
+  color: #c62828;
+  font-size: 0.8rem;
+  background: #ffebee;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+}
+
+.docs-toggle {
+  padding: 0.4rem 0.8rem;
+  background: transparent;
+  border: 1px solid #1976d2;
+  color: #1976d2;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.docs-toggle:hover {
+  background: #e3f2fd;
+}
+
+/* Input area */
 .input-area {
   display: flex;
   gap: 0.5rem;
-  padding: 1rem;
-  border-top: 1px solid #eee;
+  padding: 0.6rem 1rem;
 }
 
 .input-area input {
@@ -154,4 +227,60 @@ main {
 .input-area button:disabled {
   background: #ccc;
   cursor: not-allowed;
+}
+
+/* Documents section (collapsible, below chat) */
+.documents-section {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.documents-section h2 {
+  margin: 0 0 1rem;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.empty {
+  color: #999;
+  text-align: center;
+  padding: 2rem;
+}
+
+.document-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.doc-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.doc-date {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.delete-btn {
+  background: #e53935;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.delete-btn:hover {
+  background: #c62828;
 }

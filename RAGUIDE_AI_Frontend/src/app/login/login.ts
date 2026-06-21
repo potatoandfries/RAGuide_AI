@@ -35,7 +35,7 @@ export class Login {
       this.api.register(this.username, this.password, this.email).subscribe({
         next: (res) => {
           this.auth.saveToken(res.token);
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/chat']);
         },
         error: (err) => {
           this.error = 'Registration failed. Try a different username.';
@@ -45,7 +45,7 @@ export class Login {
       this.api.login(this.username, this.password).subscribe({
         next: (res) => {
           this.auth.saveToken(res.token);
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/chat']);
         },
         error: (err) => {
           this.error = 'Invalid username or password.';

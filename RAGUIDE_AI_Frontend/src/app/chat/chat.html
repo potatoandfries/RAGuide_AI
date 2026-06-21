@@ -2,7 +2,6 @@
   <header>
     <h1>RAGuide AI</h1>
     <nav>
-      <a routerLink="/dashboard">Documents</a>
       <a routerLink="/chat">Chat</a>
       <button class="logout-btn" (click)="logout()">Logout</button>
     </nav>
@@ -14,7 +13,7 @@
         @if (messages.length === 0) {
           <div class="welcome">
             <h2>Ask a question about your documents</h2>
-            <p>Type a prompt below to get started.</p>
+            <p>Type a prompt below to get started, or upload a PDF document first.</p>
           </div>
         }
         @for (msg of messages; track $index) {
@@ -24,15 +23,58 @@
         }
       </div>
 
-      <div class="input-area">
-        <input
-          type="text"
-          [(ngModel)]="prompt"
-          (keyup.enter)="send()"
-          placeholder="Ask a question about your documents..."
-        />
-        <button (click)="send()" [disabled]="!prompt.trim()">Send</button>
+      <!-- Bottom bar: input + document upload -->
+      <div class="bottom-bar">
+        <!-- Document upload row -->
+        <div class="upload-row">
+          <div class="upload-form">
+            <input
+              type="file"
+              accept=".pdf"
+              (change)="onFileSelected($event)"
+              id="file-input"
+            />
+            <button class="upload-btn" (click)="upload()" [disabled]="!selectedFile || uploading">
+              {{ uploading ? 'Uploading...' : 'Upload PDF' }}
+            </button>
+          </div>
+          @if (error) {
+            <div class="error-msg">{{ error }}</div>
+          }
+        </div>
+
+        <!-- Chat input row -->
+        <div class="input-area">
+          <input
+            type="text"
+            [(ngModel)]="prompt"
+            (keyup.enter)="send()"
+            placeholder="Ask a question about your documents..."
+          />
+          <button (click)="send()" [disabled]="!prompt.trim()">Send</button>
+        </div>
       </div>
     </div>
+
+      <!-- Documents section (always visible below chat) -->
+      <section class="documents-section">
+        <h2>Your Documents ({{ documents.length }})</h2>
+        @if (loading) {
+          <p class="empty">Loading documents...</p>
+        } @else if (documents.length === 0) {
+          <p class="empty">No documents yet. Upload a PDF to get started.</p>
+        }
+        <div class="document-list">
+          @for (doc of documents; track doc.id) {
+            <div class="document-card">
+              <div class="doc-info">
+                <strong>{{ doc.title }}</strong>
+                <span class="doc-date">{{ doc.uploaded_at | date:'medium' }}</span>
+              </div>
+              <button class="delete-btn" (click)="deleteDoc(doc.id)">Delete</button>
+            </div>
+          }
+        </div>
+      </section>
   </main>
 </div>

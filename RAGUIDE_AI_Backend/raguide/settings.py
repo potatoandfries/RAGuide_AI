@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0$%2(yhd(9a&t$uyhth0*&1i3+=zu7_99zcu4x-er6ng$v52k='
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-0$%2(yhd(9a&t$uyhth0*&1i3+=zu7_99zcu4x-er6ng$v52k=')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -141,5 +142,6 @@ REST_FRAMEWORK = {
 # CORS settings
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
+    'http://localhost:4200',
 ]
 CORS_ALLOW_CREDENTIALS = True
