@@ -42,22 +42,14 @@ export class ApiService {
     return this.http.post<{ token: string }>(`${this.baseUrl}/api/auth/register/`, { username, password, email });
   }
 
-  logout() {
-    return this.http.post(`${this.baseUrl}/api/auth/logout/`, {}, { headers: this.getHeaders() });
-  }
-
   // PDF Documents
   getDocuments() {
     return this.http.get<PDFDocument[]>(`${this.baseUrl}/api/documents/`, { headers: this.getHeaders() });
   }
 
   uploadDocument(formData: FormData) {
-    // Do NOT set Content-Type header — browser must set it with the multipart boundary for FormData
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': token ? `Token ${token}` : '',
-    });
-    return this.http.post<PDFDocument>(`${this.baseUrl}/api/documents/`, formData, { headers });
+    // ponytail: reuse getHeaders, browser sets Content-Type for multipart
+    return this.http.post<PDFDocument>(`${this.baseUrl}/api/documents/`, formData, { headers: this.getHeaders() });
   }
 
   deleteDocument(id: number) {
